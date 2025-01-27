@@ -9,9 +9,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.get("/", (req, res) => {
-    // { fileName: 'hii', message: 'Hey this is text' }
-    // console.log(req.body);
-    // __dirname+`\\hii ji`.split(" ").join("") + ".txt"
     fs.readdir('./files', (err,files) => {
         if(err){
             console.log("Error Reading Files ... ");
@@ -22,8 +19,8 @@ app.get("/", (req, res) => {
 
 var counter = 1;
 app.post("/submitForm", (req,res)=> {
-    console.log(__dirname + `\\files\\${req.body.fileName}.txt`);
-    if(fs.existsSync(__dirname + `\\files\\${req.body.fileName}.txt`)){
+    console.log(__dirname + `\\files\\${req.body.fileName}`.split(" ").join("") + ".txt");
+    if(fs.existsSync(__dirname + `\\files\\${req.body.fileName}`.split(" ").join("") + ".txt")){
         console.log("file already exists");
         fs.writeFile(path.join(__dirname+`\\files\\${req.body.fileName}`.split(" ").join("") + counter + ".txt"), req.body.message , (err) => {
             console.log("updated counter " + counter);
@@ -41,7 +38,8 @@ app.post("/submitForm", (req,res)=> {
         res.render("Error");
     }
     else{
-        fs.writeFile(path.join(__dirname+`\\files\\${req.body.fileName}`.split(" ").join("") + ".txt"), req.body.message , (err) => {
+        // console.log(path.join(__dirname+`\\files\\${req.body.fileName}`.split(" ").join("") + ".txt"))
+        fs.writeFile(path.join(__dirname+`\\files\\${req.body.fileName}`.split(" ").join("")+'.txt'), req.body.message , (err) => {
             if(err){
                 console.log("Error Writing into files");
             }

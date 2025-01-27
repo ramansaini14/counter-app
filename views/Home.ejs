@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-black">
+    <div class="flex justify-center bg-black py-10">
+        <h1 class="text-3xl text-white">This is Heading</h1>
+    </div>
+    <form class="flex flex-col justify-center items-center flex-wrap" action="/submitForm" method="post">
+        <input class="border border-white w-3/4 py-10 px-5 mx-5 text-white" type="text" name="fileName" placeholder="Enter Name of the file with which you want to save the message of task">
+        <textarea class="border border-white w-3/4 py-10 px-5 mx-5 text-white mt-5" name="message" placeholder="Enter message which you want to save in file"></textarea>
+        <button class="bg-blue-800 p-10 mt-5" type="submit">Submit</button>
+    </form>
+
+    <div class="cards flex justify-center items-center flex-wrap">
+        <% if(fileName.length > 0) { %>
+            <% fileName.forEach((file) => { %>
+                <div class="card border border-white w-1/4 mx-15 h-60 mt-10 flex flex-col justify-between py-10 px-5">
+                    <div class="fnEdit flex justify-between ">
+                        <h1 class="text-white mt-3"><%= file %></h1>
+                        <div class="flex justify-between">
+                            <a href="/edit/<%=file%>" class="text-green-500 border border-white w-20 p-3 rounded mr-2">Edit</a>
+                            <a href="/delete/<%=file%>" class="text-red-500 border border-white w-20 p-3 rounded">Delete</a>
+                        </div>
+                    </div>
+                    <a class="text-blue-500" href="/viewFile/<%=file%>">Click Here to view the file</a>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p class=" mt-20 text-zinc-200">No tasks ...</p>
+        <% } %>                
+    </div>
+</body>
+</html>

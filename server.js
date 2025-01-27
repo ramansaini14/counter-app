@@ -37,7 +37,7 @@ app.post("/submitForm", (req,res)=> {
         console.log(counter);
 
     }
-    else if(`${req.body.fileName}`==''){
+    else if(`${req.body.fileName}`.split(" ").join("")==''){
         res.render("Error");
     }
     else{
@@ -65,11 +65,15 @@ app.get('/viewFile/:nameOfFile', (req, res) => {
 })
 
 app.get("/edit/:requestedFile", (req,res) => {
-        fs.rename(`./files/${req.params.requestedFile}`, req.params.requestedFile, (err)=> {
-            console.log("error occored -- ", err);
-        })
-        console.log("file updated");
-        res.render("edit", {requestedFile: requestedFile});
+    res.render("edit", {filename: req.params.requestedFile});
+})
+
+app.post("/edit", (req,res) => {
+    fs.rename(`./files/${req.body.previous}`, `./files/${req.body.new}` , (err)=> {
+        console.log("error occored -- ", err);
+    })
+    console.log("file updated"); 
+    res.redirect("/");   
 })
 
 app.get("/delete/:fileToDelete", (req,res) => {

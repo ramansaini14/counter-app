@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-black text-white">
     <a href="/" class="p-10 text-blue-400">Go Back to home page</a>
-    <h1>This is Edit page</h1>
-    <form action="/" method="post">
-        <input type="text" placeholder="Enter old name of file" value="">
-        <input type="text" placeholder="Enter new name of file">
+    <h1 class="text-4xl ml-10 mt-5">This is Edit page</h1>
+    <form action="/edit" method="post">
+        <input class="w-2/4 border border-white p-10 mt-5 ml-10" type="text" placeholder="Enter old name of file" value="<%= filename %>" name="previous">
+        <input class="w-2/4 border border-white p-10 mt-5 ml-10" type="text" placeholder="Enter new name of file" name="new">
+        <button class=" block bg-blue-500 w-1/4 border border-white p-10 mt-5 ml-10">Change</button>
     </form>
     <%  %>
 </body>
